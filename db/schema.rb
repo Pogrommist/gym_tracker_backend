@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_30_164932) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_30_170323) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,6 +45,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_30_164932) do
     t.bigint "exercise_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sets_amount"
+    t.integer "reps_amount"
+    t.float "load"
     t.index ["exercise_id"], name: "index_exercise_registers_on_exercise_id"
     t.index ["exercise_set_id"], name: "index_exercise_registers_on_exercise_set_id"
   end
@@ -64,6 +67,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_30_164932) do
     t.text "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "training_session_histories", force: :cascade do |t|
+    t.integer "sets_amount"
+    t.integer "reps_amount"
+    t.float "load"
+    t.bigint "training_session_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["training_session_id"], name: "index_training_session_histories_on_training_session_id"
   end
 
   create_table "training_sessions", force: :cascade do |t|
@@ -106,6 +119,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_30_164932) do
   add_foreign_key "exercise_registers", "exercise_sets"
   add_foreign_key "exercise_registers", "exercises"
   add_foreign_key "exercise_sets", "users"
+  add_foreign_key "training_session_histories", "training_sessions"
   add_foreign_key "training_sessions", "exercise_sets"
   add_foreign_key "training_sessions", "users"
 end
