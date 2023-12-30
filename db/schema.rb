@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_30_115800) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_30_163921) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,6 +38,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_30_115800) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "exercise_registers", force: :cascade do |t|
+    t.bigint "exercise_set_id", null: false
+    t.bigint "exercise_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exercise_id"], name: "index_exercise_registers_on_exercise_id"
+    t.index ["exercise_set_id"], name: "index_exercise_registers_on_exercise_set_id"
+  end
+
+  create_table "exercise_sets", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_exercise_sets_on_user_id"
   end
 
   create_table "exercises", force: :cascade do |t|
@@ -74,4 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_30_115800) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "exercise_registers", "exercise_sets"
+  add_foreign_key "exercise_registers", "exercises"
+  add_foreign_key "exercise_sets", "users"
 end
