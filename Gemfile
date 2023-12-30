@@ -50,6 +50,9 @@ gem "bootsnap", require: false
 gem 'devise', '~> 4.9'
 gem 'devise_token_auth'
 gem 'rack-cors'
+gem 'activeadmin'
+gem 'active_skin'
+gem "sassc-rails"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
