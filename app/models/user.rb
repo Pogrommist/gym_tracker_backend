@@ -7,4 +7,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable
   include DeviseTokenAuth::Concerns::User
   has_many :exercise_sets, dependent: :destroy
+  has_many :training_sessions, dependent: :destroy
 end
