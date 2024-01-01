@@ -74,15 +74,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_30_170323) do
     t.integer "reps_amount"
     t.float "load"
     t.bigint "training_session_id", null: false
+    t.bigint "exercise_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["exercise_id"], name: "index_training_session_histories_on_exercise_id"
     t.index ["training_session_id"], name: "index_training_session_histories_on_training_session_id"
   end
 
   create_table "training_sessions", force: :cascade do |t|
-    t.datetime "started_at"
+    t.datetime "started_at", default: "2024-01-01 17:25:18"
     t.datetime "ended_at"
-    t.boolean "is_fully_completed"
     t.bigint "exercise_set_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -119,6 +120,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_30_170323) do
   add_foreign_key "exercise_registers", "exercise_sets"
   add_foreign_key "exercise_registers", "exercises"
   add_foreign_key "exercise_sets", "users"
+  add_foreign_key "training_session_histories", "exercises"
   add_foreign_key "training_session_histories", "training_sessions"
   add_foreign_key "training_sessions", "exercise_sets"
   add_foreign_key "training_sessions", "users"
