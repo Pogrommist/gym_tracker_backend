@@ -1,5 +1,5 @@
 class ExerciseSetsController < ApiController
-  before_action :find_exercise, except: [:create, :index]
+  before_action :find_exercise_set, except: [:create, :index]
 
   def index
     render json: current_user.exercise_sets
@@ -21,8 +21,8 @@ class ExerciseSetsController < ApiController
 
   private
 
-  def find_exercise
-    @exercise_set = User.last.exercise_sets.find(params[:id])
+  def find_exercise_set
+    @exercise_set = current_user.exercise_sets.find(params[:id])
   end
 
   def exercise_set_params
