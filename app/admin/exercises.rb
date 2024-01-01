@@ -1,6 +1,9 @@
 ActiveAdmin.register Exercise do
   permit_params :name, :description, :video_url, :image_url
 
+  remove_filter :training_session_histories
+  remove_filter :exercise_registers
+
   index do
     column :id
     column :name
