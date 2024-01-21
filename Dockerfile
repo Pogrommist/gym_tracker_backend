@@ -16,6 +16,4 @@ ARG DEFAULT_PORT 3000
 
 EXPOSE ${DEFAULT_PORT}
 
-RUN set -a && . .env && set +a
-
 CMD ["rails", "s", "-e", "production"]
