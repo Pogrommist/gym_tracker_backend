@@ -10,6 +10,8 @@ COPY Gemfile* ./
 
 RUN bundle install
 
+RUN rails assets:precompile
+
 ADD . /docker/app
 
 ARG DEFAULT_PORT 3000
