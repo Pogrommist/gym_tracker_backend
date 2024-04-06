@@ -2,7 +2,7 @@ class ExerciseSetsController < ApiController
   before_action :find_exercise_set, except: [:create, :index]
 
   def index
-    render json: current_user.exercise_sets
+    render json: current_user.exercise_sets.includes(exercise_registers: [:exercise ]), include: { exercise_registers: { include: :exercise } }
   end
 
   def create
