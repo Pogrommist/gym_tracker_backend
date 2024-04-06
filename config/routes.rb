@@ -9,4 +9,7 @@ Rails.application.routes.draw do
   resources :exercise_sets, only: %i[index create update destroy]
   resources :exercise_registers, only: %i[create update destroy]
   resources :training_sessions, only: %i[create update]
+  resources :users, only: %i[] do
+    get :get_profile, on: :collection
+  end
 end
